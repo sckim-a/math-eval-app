@@ -373,6 +373,8 @@ function renderHome() {
   `;
 }
 
+window.renderHome = renderHome;
+
 window.reloadAllData = async function () {
   try {
     renderLoading("데이터를 다시 불러오는 중입니다...");
@@ -783,3 +785,51 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 renderLoading("앱을 준비하는 중입니다...");
+
+window.seedUnits = async function () {
+  if (state.units.length > 0) {
+    if (!confirm("이미 단원이 존재합니다. 계속 추가할까요?")) return;
+  }
+
+  if (!state.isAdmin) {
+    alert("관리자만 실행할 수 있어요.");
+    return;
+  }
+
+  const units = [
+    { name: "4. 평면도형의 이동", order: 4 },
+    { name: "5. 막대그래프", order: 5 },
+    { name: "6. 규칙 찾기", order: 6 },
+    { name: "7. 분수의 덧셈과 뺄셈", order: 7 },
+    { name: "8. 삼각형", order: 8 },
+    { name: "9. 소수의 덧셈과 뺄셈", order: 9 },
+    { name: "10. 사각형", order: 10 },
+    { name: "11. 꺾은선그래프", order: 11 },
+    { name: "12. 다각형", order: 12 }
+  ];
+
+  try {
+    renderLoading("단원 추가 중입니다...");
+
+    const batch = writeBatch(db);
+
+    units.forEach(u => {
+      const ref = doc(collection(db, "units"));
+      batch.set(ref, {
+        name: u.name,
+        description: "",
+        order: u.order,
+        isActive: true
+      });
+    });
+
+    await batch.commit();
+
+    alert("4학년 단원 추가 완료!");
+    await loadUnitsFromFirestore();
+    renderHome();
+  } catch (e) {
+    console.error(e);
+    alert("단원 추가 실패");
+  }
+};
