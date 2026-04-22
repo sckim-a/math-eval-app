@@ -207,3 +207,68 @@ button {
     flex-direction: column;
   }
 }
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dbe3f0;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #fff;
+}
+
+textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.auth-box {
+  max-width: 520px;
+  margin: 30px auto;
+}
+
+.admin-note {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+.small-text {
+  font-size: 13px;
+  color: #666;
+}
+
+.code-sample {
+  background: #f7faff;
+  border: 1px solid #dbe3f0;
+  border-radius: 12px;
+  padding: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #334;
+}
+
+.top-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
