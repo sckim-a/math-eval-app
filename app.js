@@ -588,7 +588,15 @@ window.startQuiz = async function (unitId, wrongOnly = false) {
       unitQuestions = unitQuestions.filter(q => state.lastWrongIds.includes(q.id));
     }
 
-    state.currentQuestions = unitQuestions;
+    // ✅ 랜덤 섞기 (Fisher-Yates shuffle)
+    for (let i = unitQuestions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [unitQuestions[i], unitQuestions[j]] = [unitQuestions[j], unitQuestions[i]];
+    }
+
+    // ✅ 최대 20개만 사용
+    state.currentQuestions = unitQuestions.slice(0, 20);
+
     const unit = getCurrentUnit();
 
     if (state.currentQuestions.length === 0) {
