@@ -597,7 +597,7 @@ window.startQuiz = async function (unitId, wrongOnly = false) {
     }
 
     // ✅ 최대 20개만 사용
-    state.currentQuestions = unitQuestions.slice(0, 20);
+    state.currentQuestions = unitQuestions.slice(0, 10);
 
     const unit = getCurrentUnit();
 
